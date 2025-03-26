@@ -1,0 +1,15 @@
+School stystem
+> See all strudents through an API
+> See all teachers through an API
+
+/*Domain Model*/
+
+student => name
+teacher => name
+Course => student, teacher, duration
+
+the three i's
+
+install the package
+import the package
+initialize
