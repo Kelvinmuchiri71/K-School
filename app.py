@@ -45,15 +45,16 @@ def create_student():
 def get_student(student_id):
     #will return a sinlgle student by ID
 
-    student = Student.query.get(student_id)                                    #query the database
-    if not student:
-        return jsonify({"Error: Student not found"}), 404
-    return jsonify(student.to_dict())
-
-
+    student = Student.query.get(student_id)                                  #query the database
+    if student:
+        return jsonify(student.to_dict())
+    else:
+        return jsonify({"Error": f"Student {student_id} not found"}), 404
+    
+    
 #PATCH method
 
-@app.route('/students/<int:students_id>', methods=['PATCH'])
+@app.route('/students/<int:student_id>', methods=['PATCH'])
 def update_student(student_id):
     #updates a students information by ID
 
@@ -76,7 +77,7 @@ def update_student(student_id):
 
 #DELETE request
 
-@app.route('/students/<int:students_id>', methods=['DELETE'])
+@app.route('/students/<int:student_id>', methods=['DELETE'])
 def delete_student(student_id):
     #deletes a student by ID
 
@@ -85,7 +86,7 @@ def delete_student(student_id):
         return jsonify({"Error: Student not found"}), 404
     db.session.delete(student)
     db.session.commit()
-    return jsonify({"message": "Student deleted"}), 200
+    return jsonify({"success": "Student deleted"}), 200
 
 
 if __name__ == '__main__':
